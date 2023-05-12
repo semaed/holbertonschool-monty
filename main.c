@@ -49,11 +49,15 @@ int main(int argc, char **argv)
 			line[read - 1] = '\0';
 
 		/*Tokenize the line to get the opcode and its argument (if any)*/
-		opcode = strtok(line, " ");
-		global_variable->argument = strtok(NULL, " ");
+		opcode = strtok(line, " \t");/*Added '\t' to handle tab characters*/
+		/*Check if the line is not empty or starts with a comment*/
+		if (opcode != NULL && opcode[0] != '#')
+		{
+		global_variable->argument = strtok(NULL, " \t");
 
 		/*Execute the opcode*/
 		execute_opcode(&stack, opcode, line_number);
+		}
 
 		/*Free the line buffer and reset the length*/
 		free(line);
