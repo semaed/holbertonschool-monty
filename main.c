@@ -5,6 +5,18 @@ global_t *global_variable = NULL;/*Initialize the global variable pointer to NUL
 /*Function prototype for execute_opcode*/
 void execute_opcode(stack_t **stack, char *opcode, unsigned int line_number);
 
+void free_stack(stack_t *stack)
+{
+	stack_t *temp;
+
+	while (stack)
+	{
+		temp = stack->next;
+		free(stack);
+		stack = temp;
+	}
+}
+
 int main(int argc, char **argv)
 {
 	FILE *file;
@@ -69,6 +81,7 @@ int main(int argc, char **argv)
 	fclose(file);
 	free(line);
 	free(global_variable);
+	free_stack(stack);
 
 	return (EXIT_SUCCESS);
 }
