@@ -95,6 +95,7 @@ void execute_opcode(stack_t **stack, char *opcode, unsigned int line_number)
 		{"push", push},
 		{"pall", pall},
 		{"pint", pint},
+		{"pop", pop},
 		{NULL, NULL}
 	};
 
